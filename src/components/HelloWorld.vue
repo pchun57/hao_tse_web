@@ -1,9 +1,18 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import {onMounted, ref} from 'vue'
+import {useHouseQuery} from "../features/houses/useHouseQuery.ts";
 
 defineProps<{ msg: string }>()
 
+const {loadHousesDatas} = useHouseQuery();
+
 const count = ref(0)
+
+onMounted(async () => {
+  const datas = await loadHousesDatas();
+
+  console.log(datas);
+})
 </script>
 
 <template>
